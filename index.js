@@ -50,6 +50,8 @@ function set_equations(roots, min_k, max_k) {
     quad_constant /= factor
 
     document.getElementById("quadratic_equation").innerHTML = `${y_multiplier}y = ${x2_multiplier}x² ${x_multiplier_quad<0?"":"+"}${x_multiplier_quad}x ${quad_constant<0?"":"+"}${quad_constant}`
+    document.getElementById("root1").innerHTML = ""
+    document.getElementById("root2").innerHTML = ""
 }
 
 function hcf(numbers, rtn = 1) {
@@ -75,7 +77,11 @@ function reveal_answer(roots) {
     document.getElementById("root2").innerHTML = `x = ${roots["x2"]}, y = ${roots["y2"]}`
 }
 
-roots = generate_roots(-10, 11)
-set_equations(roots, -7, 8)
+function new_question() {
+    roots = generate_roots(-10, 11)
+    set_equations(roots, -7, 8)
+    document.getElementById("answer_button").addEventListener("click", () => reveal_answer(roots))
+}
 
-document.getElementById("answer_button").addEventListener("click", () => reveal_answer(roots))
+document.getElementById("refresh").addEventListener("click", new_question)
+new_question()
